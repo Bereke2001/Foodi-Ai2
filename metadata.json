@@ -1,0 +1,5 @@
+{
+  "name": "Foodi AI",
+  "description": "An interactive AI-powered chat application for ordering food, featuring a dynamic menu, cart system, and responsive design.",
+  "requestFramePermissions": []
+}
