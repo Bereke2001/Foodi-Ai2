@@ -69,7 +69,8 @@ export default function App() {
   useEffect(() => {
     if (!activeOrder || activeOrder.status === 'completed') return;
 
-    const timers: ReturnType<typeof setTimeout>[] = [];
+    // Use any[] to avoid NodeJS vs DOM Timer type conflicts in different build environments
+    const timers: any[] = [];
 
     if (activeOrder.status === 'accepted') {
        timers.push(setTimeout(() => {

@@ -38,7 +38,8 @@ const CartModal: React.FC<CartModalProps> = ({
   const currentMenu = useMemo(() => getMenuData(language), [language]);
   
   const upsellItems = useMemo(() => {
-    const allItems = Object.values(currentMenu).flat() as Dish[];
+    // Use reduce instead of flat() for better compatibility
+    const allItems = Object.values(currentMenu).reduce<Dish[]>((acc, items) => acc.concat(items), []);
     return allItems.filter(item => !cart.find(c => c.id === item.id)).slice(0, 5);
   }, [cart, currentMenu]);
 
