@@ -39,7 +39,8 @@ const CartModal: React.FC<CartModalProps> = ({
   
   const upsellItems = useMemo(() => {
     // Use reduce instead of flat() for better compatibility
-    const allItems = Object.values(currentMenu).reduce<Dish[]>((acc, items) => acc.concat(items), []);
+    // Explicitly cast Object.values result or typed argument to avoid 'unknown' error in strict TS environments
+    const allItems = (Object.values(currentMenu) as Dish[][]).reduce<Dish[]>((acc, items) => acc.concat(items), []);
     return allItems.filter(item => !cart.find(c => c.id === item.id)).slice(0, 5);
   }, [cart, currentMenu]);
 
@@ -118,7 +119,7 @@ const CartModal: React.FC<CartModalProps> = ({
                  />
                  
                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -mt-8 flex flex-col items-center animate-bounce pointer-events-none z-10">
-                    <MapPin className="w-10 h-10 text-rose-600 drop-shadow-lg fill-rose-600" />
+                    <MapPin className="w-10 h-10 text-pink-600 drop-shadow-lg fill-pink-600" />
                     <div className="w-3 h-1.5 bg-black/20 rounded-[100%] blur-[2px] mt-1"></div>
                  </div>
                  
@@ -130,12 +131,12 @@ const CartModal: React.FC<CartModalProps> = ({
                  <div>
                     <p className="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">{t.selectedAddress}</p>
                     <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                       <MapPin className="w-5 h-5 text-rose-500" /> {language === 'ru' ? 'пр. Абая 44' : language === 'en' ? 'Abay Ave 44' : 'شارع أباي 44'}
+                       <MapPin className="w-5 h-5 text-pink-500" /> {language === 'ru' ? 'пр. Абая 44' : language === 'en' ? 'Abay Ave 44' : 'شارع أباي 44'}
                     </h3>
                  </div>
                  <button 
                     onClick={handleMapConfirm}
-                    className={`w-full py-4 rounded-2xl ${THEME.gradient} text-white font-bold shadow-lg shadow-rose-200 active:scale-95 transition-all`}
+                    className={`w-full py-4 rounded-2xl ${THEME.gradient} text-white font-bold shadow-lg shadow-pink-200 active:scale-95 transition-all`}
                  >
                     {t.confirmAddress}
                  </button>
@@ -153,8 +154,8 @@ const CartModal: React.FC<CartModalProps> = ({
           {/* HEADER */}
           <div className="p-5 border-b border-gray-100 flex items-center justify-between bg-white z-10 shadow-sm">
              <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                {step === 'cart' && <><span className="bg-rose-100 text-rose-600 p-1.5 rounded-lg"><ShoppingBag className="w-5 h-5" /></span> {t.cartTitle}</>}
-                {step === 'payment' && <><span className="bg-rose-100 text-rose-600 p-1.5 rounded-lg"><CreditCard className="w-5 h-5" /></span> {t.paymentTitle}</>}
+                {step === 'cart' && <><span className="bg-pink-100 text-pink-600 p-1.5 rounded-lg"><ShoppingBag className="w-5 h-5" /></span> {t.cartTitle}</>}
+                {step === 'payment' && <><span className="bg-pink-100 text-pink-600 p-1.5 rounded-lg"><CreditCard className="w-5 h-5" /></span> {t.paymentTitle}</>}
                 {step === 'success' && <><span className="bg-green-100 text-green-600 p-1.5 rounded-lg"><CheckCircle className="w-5 h-5" /></span> {t.successTitle}</>}
              </h2>
              <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full text-gray-400 hover:text-gray-600 transition-colors"><X className="w-6 h-6" /></button>
@@ -169,7 +170,7 @@ const CartModal: React.FC<CartModalProps> = ({
                          <ShoppingBag className="w-10 h-10 text-gray-300" />
                       </div>
                       <p className="font-bold text-lg text-gray-600">{t.emptyCart}</p>
-                      <button onClick={onClose} className="mt-6 px-6 py-3 bg-white border border-rose-200 text-rose-600 rounded-xl font-bold text-sm hover:bg-rose-50 transition-colors shadow-sm">
+                      <button onClick={onClose} className="mt-6 px-6 py-3 bg-white border border-pink-200 text-pink-600 rounded-xl font-bold text-sm hover:bg-pink-50 transition-colors shadow-sm">
                         {t.goToMenu}
                       </button>
                    </div>
@@ -182,12 +183,12 @@ const CartModal: React.FC<CartModalProps> = ({
                                <img src={item.img} alt="" className="w-16 h-16 object-cover rounded-xl" />
                                <div className="pt-0.5">
                                   <p className="font-bold text-sm text-gray-800 leading-tight mb-1">{item.name}</p>
-                                  <p className="text-rose-600 font-bold text-xs">{item.price * item.qty}₸</p>
+                                  <p className="text-pink-600 font-bold text-xs">{item.price * item.qty}₸</p>
                                   {item.qty > 1 && <span className="text-[10px] text-gray-400">({item.price}₸ / {t.pcs})</span>}
                                </div>
                             </div>
                             <div className="flex items-center bg-gray-50 rounded-xl border border-gray-200 h-8 self-center">
-                               <button onClick={() => onRemove(item.id)} className="w-8 h-full flex items-center justify-center text-gray-500 hover:text-rose-500 active:scale-90">{item.qty === 1 ? <Trash2 className="w-3.5 h-3.5" /> : <Minus className="w-3.5 h-3.5" />}</button>
+                               <button onClick={() => onRemove(item.id)} className="w-8 h-full flex items-center justify-center text-gray-500 hover:text-pink-500 active:scale-90">{item.qty === 1 ? <Trash2 className="w-3.5 h-3.5" /> : <Minus className="w-3.5 h-3.5" />}</button>
                                <span className="text-xs font-bold w-6 text-center text-gray-800">{item.qty}</span>
                                <button onClick={() => onAdd(item)} className="w-8 h-full flex items-center justify-center text-gray-500 hover:text-green-600 active:scale-90"><Plus className="w-3.5 h-3.5" /></button>
                             </div>
@@ -206,8 +207,8 @@ const CartModal: React.FC<CartModalProps> = ({
                                   </div>
                                   <p className="text-xs font-bold text-gray-800 line-clamp-1 mb-1">{item.name}</p>
                                   <div className="mt-auto flex items-center justify-between">
-                                     <span className="text-xs font-bold text-rose-600">{item.price}₸</span>
-                                     <button onClick={() => onAdd(item)} className="w-6 h-6 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center hover:bg-rose-500 hover:text-white transition-colors shadow-sm"><Plus className="w-3.5 h-3.5" /></button>
+                                     <span className="text-xs font-bold text-pink-600">{item.price}₸</span>
+                                     <button onClick={() => onAdd(item)} className="w-6 h-6 rounded-full bg-pink-50 text-pink-600 flex items-center justify-center hover:bg-pink-500 hover:text-white transition-colors shadow-sm"><Plus className="w-3.5 h-3.5" /></button>
                                   </div>
                                </div>
                              ))}
@@ -223,30 +224,30 @@ const CartModal: React.FC<CartModalProps> = ({
                 <div className="p-5 animate-slide-in-right">
                     <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4">{t.paymentMethod}</h3>
                     <div className="space-y-3">
-                        <button onClick={() => setPaymentMethod('card')} className={`w-full p-4 rounded-2xl border flex items-center gap-4 transition-all ${paymentMethod === 'card' ? 'border-rose-500 bg-rose-50 shadow-sm ring-1 ring-rose-500' : 'border-gray-200 bg-white hover:border-rose-200'}`}>
-                            <div className={`p-2 rounded-full ${paymentMethod === 'card' ? 'bg-rose-500 text-white' : 'bg-gray-100 text-gray-500'}`}><CreditCard className="w-6 h-6" /></div>
+                        <button onClick={() => setPaymentMethod('card')} className={`w-full p-4 rounded-2xl border flex items-center gap-4 transition-all ${paymentMethod === 'card' ? 'border-pink-500 bg-pink-50 shadow-sm ring-1 ring-pink-500' : 'border-gray-200 bg-white hover:border-pink-200'}`}>
+                            <div className={`p-2 rounded-full ${paymentMethod === 'card' ? 'bg-pink-500 text-white' : 'bg-gray-100 text-gray-500'}`}><CreditCard className="w-6 h-6" /></div>
                             <div className="text-left flex-1">
                                 <p className={`font-bold text-sm ${paymentMethod === 'card' ? 'text-gray-900' : 'text-gray-700'}`}>{t.card}</p>
                             </div>
-                            {paymentMethod === 'card' && <div className="w-5 h-5 bg-rose-500 rounded-full flex items-center justify-center"><div className="w-2 h-2 bg-white rounded-full"></div></div>}
+                            {paymentMethod === 'card' && <div className="w-5 h-5 bg-pink-500 rounded-full flex items-center justify-center"><div className="w-2 h-2 bg-white rounded-full"></div></div>}
                         </button>
 
-                        <button onClick={() => setPaymentMethod('apple_pay')} className={`w-full p-4 rounded-2xl border flex items-center gap-4 transition-all ${paymentMethod === 'apple_pay' ? 'border-rose-500 bg-rose-50 shadow-sm ring-1 ring-rose-500' : 'border-gray-200 bg-white hover:border-rose-200'}`}>
+                        <button onClick={() => setPaymentMethod('apple_pay')} className={`w-full p-4 rounded-2xl border flex items-center gap-4 transition-all ${paymentMethod === 'apple_pay' ? 'border-pink-500 bg-pink-50 shadow-sm ring-1 ring-pink-500' : 'border-gray-200 bg-white hover:border-pink-200'}`}>
                             <div className={`p-2 rounded-full ${paymentMethod === 'apple_pay' ? 'bg-black text-white' : 'bg-gray-100 text-gray-500'}`}><Smartphone className="w-6 h-6" /></div>
                             <div className="text-left flex-1">
                                 <p className={`font-bold text-sm ${paymentMethod === 'apple_pay' ? 'text-gray-900' : 'text-gray-700'}`}>{t.applePay}</p>
                                 <p className="text-xs text-gray-400">{t.fastPay}</p>
                             </div>
-                             {paymentMethod === 'apple_pay' && <div className="w-5 h-5 bg-rose-500 rounded-full flex items-center justify-center"><div className="w-2 h-2 bg-white rounded-full"></div></div>}
+                             {paymentMethod === 'apple_pay' && <div className="w-5 h-5 bg-pink-500 rounded-full flex items-center justify-center"><div className="w-2 h-2 bg-white rounded-full"></div></div>}
                         </button>
 
-                         <button onClick={() => setPaymentMethod('cash')} className={`w-full p-4 rounded-2xl border flex items-center gap-4 transition-all ${paymentMethod === 'cash' ? 'border-rose-500 bg-rose-50 shadow-sm ring-1 ring-rose-500' : 'border-gray-200 bg-white hover:border-rose-200'}`}>
+                         <button onClick={() => setPaymentMethod('cash')} className={`w-full p-4 rounded-2xl border flex items-center gap-4 transition-all ${paymentMethod === 'cash' ? 'border-pink-500 bg-pink-50 shadow-sm ring-1 ring-pink-500' : 'border-gray-200 bg-white hover:border-pink-200'}`}>
                             <div className={`p-2 rounded-full ${paymentMethod === 'cash' ? 'bg-green-500 text-white' : 'bg-gray-100 text-gray-500'}`}><Banknote className="w-6 h-6" /></div>
                             <div className="text-left flex-1">
                                 <p className={`font-bold text-sm ${paymentMethod === 'cash' ? 'text-gray-900' : 'text-gray-700'}`}>{t.cash}</p>
                                 <p className="text-xs text-gray-400">{t.cashDesc}</p>
                             </div>
-                             {paymentMethod === 'cash' && <div className="w-5 h-5 bg-rose-500 rounded-full flex items-center justify-center"><div className="w-2 h-2 bg-white rounded-full"></div></div>}
+                             {paymentMethod === 'cash' && <div className="w-5 h-5 bg-pink-500 rounded-full flex items-center justify-center"><div className="w-2 h-2 bg-white rounded-full"></div></div>}
                         </button>
                     </div>
 
@@ -293,32 +294,32 @@ const CartModal: React.FC<CartModalProps> = ({
               <div className="p-5 border-t border-gray-100 bg-white pb-8 space-y-4 shadow-[0_-5px_20px_rgba(0,0,0,0.03)] z-10">
                 {step === 'cart' && cart.length > 0 && (
                     <>
-                    <div className="bg-rose-50/50 p-4 rounded-2xl border border-rose-100 space-y-3">
-                        <div className="flex items-center gap-2 text-rose-700 text-sm font-bold uppercase tracking-wide">
+                    <div className="bg-pink-50/50 p-4 rounded-2xl border border-pink-100 space-y-3">
+                        <div className="flex items-center gap-2 text-pink-700 text-sm font-bold uppercase tracking-wide">
                             {orderMode === 'dine-in' && <><Utensils className="w-4 h-4" /> {t.yourTable}</>}
                             {orderMode === 'takeaway' && <><Footprints className="w-4 h-4" /> {t.takeaway}</>}
                             {orderMode === 'delivery' && <><Bike className="w-4 h-4" /> {t.address}</>}
                         </div>
                         
                         {orderMode === 'dine-in' && (
-                            <input type="number" placeholder={t.tablePlaceholder} value={tableNumber} onChange={(e) => setTableNumber(e.target.value)} className="w-full bg-white border border-rose-200 rounded-xl h-11 px-4 text-sm outline-none focus:border-rose-500 focus:ring-2 focus:ring-rose-200 transition-all placeholder:text-gray-400 font-medium text-gray-800" />
+                            <input type="number" placeholder={t.tablePlaceholder} value={tableNumber} onChange={(e) => setTableNumber(e.target.value)} className="w-full bg-white border border-pink-200 rounded-xl h-11 px-4 text-sm outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-200 transition-all placeholder:text-gray-400 font-medium text-gray-800" />
                         )}
                         
                         {orderMode === 'takeaway' && (
                             <div className="space-y-2">
-                                <p className="text-[10px] font-bold text-rose-600 uppercase tracking-wider ml-1 opacity-80">{t.timeReady}:</p>
+                                <p className="text-[10px] font-bold text-pink-600 uppercase tracking-wider ml-1 opacity-80">{t.timeReady}:</p>
                                 <div className="relative">
                                     <select 
                                         value={deliveryDetails} 
                                         onChange={(e) => setDeliveryDetails(e.target.value)} 
-                                        className="w-full appearance-none bg-white border border-rose-200 text-gray-800 py-3 px-4 pr-10 rounded-xl leading-tight focus:outline-none focus:bg-white focus:border-rose-500 focus:ring-2 focus:ring-rose-200 transition-all font-bold text-sm shadow-sm"
+                                        className="w-full appearance-none bg-white border border-pink-200 text-gray-800 py-3 px-4 pr-10 rounded-xl leading-tight focus:outline-none focus:bg-white focus:border-pink-500 focus:ring-2 focus:ring-pink-200 transition-all font-bold text-sm shadow-sm"
                                     >
                                         <option value="Как можно скорее">{t.asap}</option>
                                         {timeSlots.map(time => (
                                             <option key={time} value={time}>{time}</option>
                                         ))}
                                     </select>
-                                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-rose-500">
+                                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-pink-500">
                                         <Clock className="w-4 h-4 mr-1" />
                                         <ChevronDown className="w-4 h-4" />
                                     </div>
@@ -330,17 +331,17 @@ const CartModal: React.FC<CartModalProps> = ({
                             <div className="space-y-2">
                                 <div className="flex items-center gap-2">
                                     <div className="relative flex-1 group">
-                                        <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-focus-within:text-rose-500 transition-colors" />
+                                        <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-focus-within:text-pink-500 transition-colors" />
                                         <input 
                                             type="text" 
                                             placeholder={t.addressPlaceholder}
                                             value={deliveryDetails} 
                                             onChange={(e) => setDeliveryDetails(e.target.value)} 
-                                            className="w-full bg-white border border-gray-200 rounded-xl h-10 pl-9 pr-10 text-xs font-medium outline-none focus:border-rose-500 focus:ring-2 focus:ring-rose-100 transition-all placeholder:text-gray-400 text-gray-800" 
+                                            className="w-full bg-white border border-gray-200 rounded-xl h-10 pl-9 pr-10 text-xs font-medium outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-100 transition-all placeholder:text-gray-400 text-gray-800" 
                                         />
                                          <button 
                                             onClick={() => setIsMapOpen(true)}
-                                            className="absolute right-1 top-1 bottom-1 w-8 rounded-lg text-rose-500 hover:bg-rose-50 flex items-center justify-center transition-colors"
+                                            className="absolute right-1 top-1 bottom-1 w-8 rounded-lg text-pink-500 hover:bg-pink-50 flex items-center justify-center transition-colors"
                                             title={t.mapBtn}
                                         >
                                             <Navigation className="w-4 h-4" />
@@ -349,12 +350,12 @@ const CartModal: React.FC<CartModalProps> = ({
                                 </div>
                                 
                                 <div className="relative group">
-                                     <FileText className="absolute left-3 top-3 w-4 h-4 text-gray-400 group-focus-within:text-rose-500 transition-colors" />
+                                     <FileText className="absolute left-3 top-3 w-4 h-4 text-gray-400 group-focus-within:text-pink-500 transition-colors" />
                                     <textarea 
                                         placeholder={t.commentPlaceholder}
                                         value={deliveryExtra.comment} 
                                         onChange={(e) => setDeliveryExtra({...deliveryExtra, comment: e.target.value})} 
-                                        className="w-full bg-white border border-gray-200 rounded-xl h-16 py-3 pl-9 pr-3 text-xs font-medium outline-none focus:border-rose-500 focus:ring-2 focus:ring-rose-100 transition-all placeholder:text-gray-400 text-gray-800 resize-none" 
+                                        className="w-full bg-white border border-gray-200 rounded-xl h-16 py-3 pl-9 pr-3 text-xs font-medium outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-100 transition-all placeholder:text-gray-400 text-gray-800 resize-none" 
                                     />
                                 </div>
                             </div>
@@ -366,7 +367,7 @@ const CartModal: React.FC<CartModalProps> = ({
                     <button 
                         onClick={handleCheckout}
                         disabled={!isValid}
-                        className={`w-full py-4 rounded-2xl ${THEME.gradient} text-white font-bold shadow-lg shadow-rose-200 active:scale-95 transition-all hover:shadow-xl hover:shadow-rose-300 disabled:opacity-50 disabled:cursor-not-allowed`}
+                        className={`w-full py-4 rounded-2xl ${THEME.gradient} text-white font-bold shadow-lg shadow-pink-200 active:scale-95 transition-all hover:shadow-xl hover:shadow-pink-300 disabled:opacity-50 disabled:cursor-not-allowed`}
                     >
                         {!isValid ? (orderMode === 'dine-in' ? t.fillTable : t.fillAddress) : t.toPay}
                     </button>
@@ -382,7 +383,7 @@ const CartModal: React.FC<CartModalProps> = ({
                         <button 
                             onClick={handlePay}
                             disabled={isProcessing}
-                            className={`w-full py-4 rounded-2xl ${THEME.gradient} text-white font-bold shadow-lg shadow-rose-200 active:scale-95 transition-all hover:shadow-xl hover:shadow-rose-300 flex items-center justify-center gap-2`}
+                            className={`w-full py-4 rounded-2xl ${THEME.gradient} text-white font-bold shadow-lg shadow-pink-200 active:scale-95 transition-all hover:shadow-xl hover:shadow-pink-300 flex items-center justify-center gap-2`}
                         >
                             {isProcessing ? <><Loader2 className="w-5 h-5 animate-spin" /> {t.processing}</> : `${t.pay} ${cartTotal}₸`}
                         </button>

@@ -1,21 +1,19 @@
-
-
 import { Category, Dish, Action, Language } from './types';
 
 export const THEME = {
-  primary: "bg-rose-500",
-  primaryText: "text-rose-600",
-  primaryBorder: "border-rose-200",
-  primaryHover: "hover:bg-rose-600",
-  lightBg: "bg-rose-50",
-  gradient: "bg-gradient-to-r from-rose-500 to-pink-600",
-  chatUserBg: "bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-md shadow-rose-200",
+  primary: "bg-pink-500",
+  primaryText: "text-pink-700",
+  primaryBorder: "border-pink-200",
+  primaryHover: "hover:bg-pink-600",
+  lightBg: "bg-pink-50",
+  gradient: "bg-gradient-to-r from-pink-500 to-rose-500",
+  chatUserBg: "bg-gray-900 text-white shadow-md shadow-gray-300",
   chatBotBg: "bg-white text-gray-800 shadow-sm border border-gray-100",
 };
 
 export const TRANSLATIONS = {
   ru: {
-    greeting: '👋 Привет! Я ИИ-ассистент Foodi AI. Чем могу помочь?',
+    greeting: '👋 Привет! Я ИИ-ассистент SOUS. Чем могу помочь?',
     cartTitle: 'Корзина',
     paymentTitle: 'Оплата',
     successTitle: 'Готово',
@@ -84,7 +82,7 @@ export const TRANSLATIONS = {
     cancel: 'Отмена',
     call: 'Вызвать',
     langChanged: 'Язык изменен на Русский 🇷🇺',
-    resetChat: '🔄 Чат сброшен. Привет! Я ИИ-ассистент Foodi AI. Чем могу помочь?',
+    resetChat: '🔄 Чат сброшен. Привет! Я ИИ-ассистент SOUS. Чем могу помочь?',
     chooseCategory: 'Выберите категорию меню:',
     hereIs: 'Вот что у нас есть в категории',
     wantMore: 'Хотите посмотреть что-то еще?',
@@ -105,7 +103,7 @@ export const TRANSLATIONS = {
     pcs: 'шт',
   },
   en: {
-    greeting: '👋 Hi! I am Foodi AI assistant. How can I help you?',
+    greeting: '👋 Hi! I am SOUS AI assistant. How can I help you?',
     cartTitle: 'Cart',
     paymentTitle: 'Payment',
     successTitle: 'Done',
@@ -174,7 +172,7 @@ export const TRANSLATIONS = {
     cancel: 'Cancel',
     call: 'Call',
     langChanged: 'Language changed to English 🇺🇸',
-    resetChat: '🔄 Chat reset. Hi! I am Foodi AI assistant. How can I help?',
+    resetChat: '🔄 Chat reset. Hi! I am SOUS AI assistant. How can I help?',
     chooseCategory: 'Choose a menu category:',
     hereIs: 'Here is what we have in',
     wantMore: 'Want to see something else?',
@@ -195,7 +193,7 @@ export const TRANSLATIONS = {
     pcs: 'pcs',
   },
   ar: {
-    greeting: '👋 مرحبًا! أنا مساعد Foodi AI. كيف يمكنني مساعدتك؟',
+    greeting: '👋 مرحبًا! أنا مساعد SOUS AI. كيف يمكنني مساعدتك؟',
     cartTitle: 'عربة التسوق',
     paymentTitle: 'الدفع',
     successTitle: 'تم',

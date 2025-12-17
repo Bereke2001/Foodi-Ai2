@@ -29,7 +29,7 @@ const OrderStatusCard: React.FC<OrderStatusCardProps> = ({ order, language }) =>
              <p className="text-sm font-bold text-gray-900">{new Date(order.createdAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
           </div>
           <div className="text-right">
-             <p className="text-rose-600 font-bold text-lg">{order.total}₸</p>
+             <p className="text-pink-600 font-bold text-lg">{order.total}₸</p>
              <p className="text-xs text-gray-400 font-medium">{order.mode === 'dine-in' ? t.dineIn : order.mode === 'takeaway' ? t.takeaway : t.delivery}</p>
           </div>
        </div>

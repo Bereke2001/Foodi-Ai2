@@ -53,9 +53,9 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ msg, cart, onAction, onAddToC
                  <button
                    key={idx}
                    onClick={() => onAction(action.action, action.payload)}
-                   className={`px-4 py-2 rounded-full border bg-white text-sm font-semibold hover:bg-rose-50 transition-all active:scale-95 shadow-sm hover:shadow-md flex items-center gap-1.5 
-                     ${action.action === 'start_over' ? 'border-gray-200 text-gray-500 hover:text-gray-700' : 'border-rose-100 text-rose-600'}
-                     ${action.action === 'call_waiter_chat' ? 'border-orange-200 text-orange-600 bg-orange-50/50' : ''}
+                   className={`px-4 py-2 rounded-full border bg-white text-sm font-semibold hover:bg-pink-50 transition-all active:scale-95 shadow-sm hover:shadow-md flex items-center gap-1.5 
+                     ${action.action === 'start_over' ? 'border-gray-200 text-gray-500 hover:text-gray-700' : 'border-pink-100 text-pink-600'}
+                     ${action.action === 'call_waiter_chat' ? 'border-pink-200 text-pink-600 bg-pink-50/50' : ''}
                      ${action.action === 'check_order_status' ? 'border-green-200 text-green-600 bg-green-50/50' : ''}
                      `}
                  >

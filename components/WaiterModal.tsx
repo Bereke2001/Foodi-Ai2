@@ -21,7 +21,7 @@ const WaiterModal: React.FC<WaiterModalProps> = ({ isOpen, onClose, tableNumber,
        <div className="bg-white rounded-2xl p-6 w-full max-w-xs relative z-10 shadow-2xl animate-fade-in">
           <h3 className="text-lg font-bold text-gray-900 mb-2">{t.callWaiterModalTitle}</h3>
           <p className="text-sm text-gray-500 mb-4">{t.enterTableNum}</p>
-          <div className="bg-orange-50 p-3 rounded-xl border border-orange-100 mb-4">
+          <div className="bg-pink-50 p-3 rounded-xl border border-pink-100 mb-4">
              <input 
                 type="number" 
                 value={tableNumber}
@@ -33,7 +33,7 @@ const WaiterModal: React.FC<WaiterModalProps> = ({ isOpen, onClose, tableNumber,
           </div>
           <div className="flex gap-2">
              <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-gray-200 text-sm font-medium text-gray-600">{t.cancel}</button>
-             <button onClick={onConfirm} className="flex-1 py-3 rounded-xl bg-orange-500 text-white text-sm font-bold shadow-lg shadow-orange-200">{t.call}</button>
+             <button onClick={onConfirm} className="flex-1 py-3 rounded-xl bg-pink-500 text-white text-sm font-bold shadow-lg shadow-pink-200">{t.call}</button>
           </div>
        </div>
     </div>

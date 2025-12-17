@@ -32,14 +32,14 @@ const DishGrid: React.FC<DishGridProps> = ({ dishes, cart, onAdd, onRemove, lang
                
                {/* Time Badge */}
                <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-full text-[11px] font-bold text-gray-800 flex items-center shadow-sm border border-white/50">
-                 <Clock className="w-3 h-3 mr-1 text-rose-500" /> {dish.time}
+                 <Clock className="w-3 h-3 mr-1 text-pink-500" /> {dish.time}
                </div>
             </div>
             
             {/* Content Area */}
             <div className="p-5 flex-1 flex flex-col">
               <div className="mb-2">
-                 <h3 className="font-extrabold text-lg text-gray-900 leading-snug tracking-tight mb-1.5 group-hover:text-rose-600 transition-colors">{dish.name}</h3>
+                 <h3 className="font-extrabold text-lg text-gray-900 leading-snug tracking-tight mb-1.5 group-hover:text-pink-600 transition-colors">{dish.name}</h3>
                  <p className="text-xs text-gray-500 font-medium line-clamp-2 leading-relaxed h-[2.5em]">{dish.desc}</p>
               </div>
               
@@ -48,14 +48,14 @@ const DishGrid: React.FC<DishGridProps> = ({ dishes, cart, onAdd, onRemove, lang
 
                 {inCart ? (
                    <div className="flex items-center bg-gray-900 rounded-2xl h-11 px-1.5 shadow-xl shadow-gray-200 ring-2 ring-gray-50">
-                      <button onClick={() => onRemove(dish.id)} className="w-9 h-full flex items-center justify-center text-white hover:text-rose-400 active:scale-75 transition-all"><Minus className="w-4 h-4" /></button>
+                      <button onClick={() => onRemove(dish.id)} className="w-9 h-full flex items-center justify-center text-white hover:text-pink-400 active:scale-75 transition-all"><Minus className="w-4 h-4" /></button>
                       <span className="text-sm font-bold w-5 text-center text-white select-none">{inCart.qty}</span>
                       <button onClick={() => onAdd(dish)} className="w-9 h-full flex items-center justify-center text-white hover:text-green-400 active:scale-75 transition-all"><Plus className="w-4 h-4" /></button>
                    </div>
                 ) : (
                   <button 
                     onClick={() => onAdd(dish)}
-                    className={`h-11 px-5 rounded-2xl ${THEME.gradient} text-white text-sm font-bold shadow-lg shadow-rose-200 active:scale-95 transition-all hover:shadow-xl hover:shadow-rose-300 flex items-center justify-center gap-1.5`}
+                    className={`h-11 px-5 rounded-2xl ${THEME.gradient} text-white text-sm font-bold shadow-lg shadow-pink-200 active:scale-95 transition-all hover:shadow-xl hover:shadow-pink-300 flex items-center justify-center gap-1.5`}
                   >
                     <Plus className="w-4 h-4" /> {t.addToCart}
                   </button>
